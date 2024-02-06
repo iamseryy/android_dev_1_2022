@@ -1,4 +1,4 @@
-# Блок Kotlin и Окружение (семинары)
+# Блок Андроид-разработчик
 |№|**Task**|**Description**|
 |--|--|--|
-|1|**[Task1](https://github.com/iamseryy/tasks_learn_kotlin/tree/main/task1)**|Начало работы|
+|1|**[Task1](https://github.com/iamseryy/android_dev_1_2022/tree/main/m1_hello_world)**|Начало работы|
