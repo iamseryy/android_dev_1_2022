@@ -6,4 +6,5 @@
     </style>
 
     <style name="Theme.M1_hello_world" parent="Base.Theme.M1_hello_world" />
+
 </resources>

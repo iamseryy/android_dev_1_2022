@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,28 +16,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/remainderTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/free"
+        android:textColor="@color/green"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add"
+        android:src="@drawable/add24px"
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="20dp"
+        android:padding="20dp"
+        android:background="@drawable/selector_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/textView3"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/counterTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="50sp"
@@ -47,13 +51,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/reduceButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/reduce"
+        android:src="@drawable/remove24px"
         android:layout_marginBottom="20dp"
         android:layout_marginStart="20dp"
+        android:padding="20dp"
+        android:background="@drawable/selector_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

@@ -5,4 +5,7 @@
     <string name="reduce">-</string>
     <string name="zero">0</string>
     <string name="free">Все места свободны</string>
+    <string name="spacesLeft">Осталось мест:</string>
+    <string name="overflow">Пассажиров слишком много</string>
+    <string name="full">Свободных мест нет</string>
 </resources>
