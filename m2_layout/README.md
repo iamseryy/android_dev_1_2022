@@ -42,4 +42,4 @@ android:ellipsize="end"
 
 
 
-### Решение: m1_hello_world
+### Решение: m2_layout
