@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">m4_component</string>
+    <string name="profile_photo">profile photo</string>
+    <string name="name">Имя</string>
 </resources>
