@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="MyTextAppearance">
+    <style name="TextAppearance">
         <item name="android:textSize">@dimen/button_text_size</item>
         <item name="android:textColor">@color/black</item>
     </style>

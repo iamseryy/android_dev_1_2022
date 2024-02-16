@@ -1,44 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
-    <ImageView
-        android:id="@+id/profilePhotoImageView"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/profile_photo"
-        android:layout_margin="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/profile_photo" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nameInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/name"
-        android:textAppearance="@style/MyTextAppearance"
-        app:counterEnabled="true"
-        app:counterMaxLength="40"
-        app:endIconMode="clear_text"
-        app:errorEnabled="true"
-        app:layout_constraintTop_toBottomOf="@id/profilePhotoImageView"
-        tools:layout_editor_absoluteX="20dp">
+        android:padding="@dimen/padding">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nameText"
+        <ImageView
+            android:id="@+id/profilePhotoImageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_photo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/profile_photo" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:hint="@string/name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:textAppearance="@style/TextAppearance"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:counterMaxLength="40"
+            app:counterEnabled="true"
+            app:layout_constraintTop_toBottomOf="@id/profilePhotoImageView">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nameTextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phoneTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:textAppearance="@style/TextAppearance"
+            app:boxBackgroundColor="@color/purple"
+            app:layout_constraintTop_toBottomOf="@id/nameTextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phoneTextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:inputType="phone"
+                android:hint="@string/phone"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/genderTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance"
+            android:text="@string/gender"
+            app:layout_constraintTop_toBottomOf="@id/phoneTextInputLayout" />
+
+        <RadioGroup
+            android:id="@+id/genderRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/genderTextView">
+
+            <RadioButton
+                android:id="@+id/maleRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/male"/>
+
+            <RadioButton
+                android:id="@+id/femaleRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female"/>
+        </RadioGroup>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/notificationSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance"
+            android:background="@color/white"
+            android:text="@string/receive_notifications"
+            android:checked="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/genderRadioGroup"
+            app:thumbTint="@color/purple_700"
+            app:trackTint="@color/purple_100" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -2,4 +2,9 @@
     <string name="app_name">m4_component</string>
     <string name="profile_photo">profile photo</string>
     <string name="name">Имя</string>
+    <string name="phone">Телефон</string>
+    <string name="gender">Пол</string>
+    <string name="male">М</string>
+    <string name="female">Ж</string>
+    <string name="receive_notifications">Получать уведомления</string>
 </resources>
