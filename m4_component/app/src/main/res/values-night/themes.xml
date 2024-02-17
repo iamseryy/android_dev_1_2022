@@ -3,5 +3,12 @@
     <style name="Base.Theme.M4_component" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/purple</item>
+        <item name="colorPrimaryVariant">@color/purple_dark</item>
+        <item name="colorOnPrimary">@color/black</item>
+
+        <item name="colorSecondary">@color/teal_light</item>
+        <item name="colorSecondaryVariant">@color/teal</item>
+        <item name="colorOnSecondary">@color/black</item>
     </style>
 </resources>

@@ -49,7 +49,10 @@
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:textAppearance="@style/TextAppearance"
+            app:boxStrokeColor="@color/grey"
+            app:hintTextColor="@color/grey"
             app:boxBackgroundColor="@color/purple"
+            android:textColorHint="@color/grey"
             app:layout_constraintTop_toBottomOf="@id/nameTextInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -66,6 +69,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance"
             android:text="@string/gender"
+            android:layout_marginTop="@dimen/margin"
             app:layout_constraintTop_toBottomOf="@id/phoneTextInputLayout" />
 
         <RadioGroup
@@ -94,13 +98,74 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance"
-            android:background="@color/white"
             android:text="@string/receive_notifications"
             android:checked="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/genderRadioGroup"
-            app:thumbTint="@color/purple_700"
-            app:trackTint="@color/purple_100" />
+            app:thumbTint="@color/purple_dark"
+            app:trackTint="@color/purple_light"/>
+
+        <CheckBox
+            android:id="@+id/authorizationCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/design_default_color_secondary"
+            android:text="@string/about_authorization"
+            android:textAppearance="@style/TextAppearance"
+            android:enabled="false"
+            app:layout_constraintTop_toBottomOf="@id/notificationSwitch"
+            tools:ignore="MissingConstraints" />
+
+        <CheckBox
+            android:id="@+id/aboutNewProductsCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/design_default_color_secondary"
+            android:text="@string/about_new_products"
+            android:textAppearance="@style/TextAppearance"
+            android:enabled="false"
+            app:layout_constraintTop_toBottomOf="@id/authorizationCheckBox"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/progressIndicatorLabelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/progress_label_padding"
+            android:textAppearance="@style/TextAppearance"
+            android:text="@string/points"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/aboutNewProductsCheckBox" />
+
+        <TextView
+            android:id="@+id/progressIndicatorValueTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/ProgressIndicatorValueTextAppearance"
+            android:text="@string/_00_100"
+            app:layout_constraintBottom_toBottomOf="@+id/progressIndicatorLabelTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/progressIndicatorLabelTextView" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/pointsProgressIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progress="0"
+            app:indicatorColor="@color/purple_dark"
+            app:layout_constraintTop_toBottomOf="@id/progressIndicatorLabelTextView"
+            app:trackColor="@color/purple_light"
+            tools:ignore="MissingConstraints,NotSibling" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/saveButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin"
+            android:enabled="false"S
+            android:text="@string/save"
+            app:layout_constraintTop_toBottomOf="@id/pointsProgressIndicator"
+            android:background="@drawable/selector_button"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
