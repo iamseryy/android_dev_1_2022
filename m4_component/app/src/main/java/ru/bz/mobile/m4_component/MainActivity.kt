@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
     private fun isSaveButtonAvailable() = isNameValid() && isPhoneValid() &&
             isGenderSelected() && isNotificationValid()
 
-    private fun isNameValid() = binding.nameTextInputEditText.text.let { !it.isNullOrEmpty() && it.length < binding.nameTextInputEditText.max}
+    private fun isNameValid() = binding.nameTextInputEditText.text.let { !it.isNullOrEmpty() && it.length <= 40 }
 
     private fun isPhoneValid() = !binding.phoneTextInputEditText.text.isNullOrEmpty()
 
