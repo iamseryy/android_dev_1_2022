@@ -162,10 +162,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin"
-            android:enabled="false"S
+            android:enabled="false"
             android:text="@string/save"
-            app:layout_constraintTop_toBottomOf="@id/pointsProgressIndicator"
-            android:background="@drawable/selector_button"/>
+            android:background="@drawable/selector_button"
+            app:layout_constraintTop_toBottomOf="@id/pointsProgressIndicator"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

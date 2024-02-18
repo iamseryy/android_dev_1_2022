@@ -1,6 +1,5 @@
 package ru.bz.mobile.m4_component
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.widget.doOnTextChanged
@@ -21,7 +20,19 @@ class MainActivity : AppCompatActivity() {
         init()
 
         binding.nameTextInputEditText.doOnTextChanged { _, _, _, _ ->
-//            binding.saveButton.isEnabled = isSaveButtonAvailable()
+            buttonControl()
+        }
+
+        binding.phoneTextInputEditText.doOnTextChanged { _, _, _, _ ->
+            buttonControl()
+        }
+
+        binding.maleRadioButton.setOnCheckedChangeListener { _, _ ->
+            buttonControl()
+        }
+
+        binding.femaleRadioButton.setOnCheckedChangeListener { _, _ ->
+            buttonControl()
         }
 
         binding.notificationSwitch.setOnCheckedChangeListener { _, isChecked ->
@@ -32,11 +43,21 @@ class MainActivity : AppCompatActivity() {
                 binding.authorizationCheckBox.isEnabled = false
                 binding.aboutNewProductsCheckBox.isEnabled = false
             }
+
+            buttonControl()
         }
 
-//        binding.saveButton.setOnClickListener {
-//            Snackbar.make(it, resources.getString(R.string.saved), Snackbar.LENGTH_SHORT).show()
-//        }
+        binding.authorizationCheckBox.setOnCheckedChangeListener { _, _, ->
+            buttonControl()
+        }
+
+        binding.aboutNewProductsCheckBox.setOnCheckedChangeListener { _, _ ->
+            buttonControl()
+        }
+
+        binding.saveButton.setOnClickListener {
+            Snackbar.make(it, resources.getString(R.string.saved), Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     private fun init() {
@@ -45,21 +66,22 @@ class MainActivity : AppCompatActivity() {
             binding.progressIndicatorValueTextView.text = resources.getString(R.string._100, this)
         }
 
-        val test = isSaveButtonAvailable()
-
-//        binding.saveButton.isEnabled = isSaveButtonAvailable()
+        buttonControl()
     }
 
-    private fun isSaveButtonAvailable(): Boolean {
-        return isNameValid()
+    private fun isSaveButtonAvailable() = isNameValid() && isPhoneValid() &&
+            isGenderSelected() && isNotificationValid()
+
+    private fun isNameValid() = binding.nameTextInputEditText.text.let { !it.isNullOrEmpty() && it.length < binding.nameTextInputEditText.max}
+
+    private fun isPhoneValid() = !binding.phoneTextInputEditText.text.isNullOrEmpty()
+
+    private fun isGenderSelected() = binding.maleRadioButton.isChecked || binding.femaleRadioButton.isChecked
+
+    private fun isNotificationValid() = binding.notificationSwitch.isChecked &&
+               (binding.aboutNewProductsCheckBox.isChecked || binding.authorizationCheckBox.isChecked)
+
+    private fun buttonControl() {
+        binding.saveButton.isEnabled = isSaveButtonAvailable()
     }
-
-    private fun isNameValid() = binding.nameTextInputEditText.text.let { !it.isNullOrEmpty() }
-
-//    private fun ButtonControl() {
-//        binding.saveButton.isEnabled = isSaveButtonAvailable()
-//    }
-
-
-
 }
