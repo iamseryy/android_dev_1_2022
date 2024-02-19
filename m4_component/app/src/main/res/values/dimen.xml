@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="width_profile_photo">120dp</dimen>
+    <dimen name="height_profile_photo">120dp</dimen>
     <dimen name="margin">16dp</dimen>
     <dimen name="progress_label_padding">8dp</dimen>
     <dimen name="padding">16dp</dimen>
     <dimen name="button_text_size">16sp</dimen>
+    <dimen name="button_radius">30dp</dimen>
 </resources>

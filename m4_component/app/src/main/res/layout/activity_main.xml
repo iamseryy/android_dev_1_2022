@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/profilePhotoImageView"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="@dimen/width_profile_photo"
+            android:layout_height="@dimen/height_profile_photo"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:src="@drawable/profile_photo"
@@ -97,15 +97,14 @@
             android:id="@+id/notificationSwitch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/Widget.App.Switch"
             android:textAppearance="@style/TextAppearance"
             android:text="@string/receive_notifications"
             android:checked="false"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/genderRadioGroup"
-            app:thumbTint="@color/purple_dark"
-            app:trackTint="@color/purple_light"/>
+            app:layout_constraintTop_toBottomOf="@id/genderRadioGroup"/>
 
-        <CheckBox
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/authorizationCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -116,7 +115,7 @@
             app:layout_constraintTop_toBottomOf="@id/notificationSwitch"
             tools:ignore="MissingConstraints" />
 
-        <CheckBox
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/aboutNewProductsCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -124,6 +123,7 @@
             android:text="@string/about_new_products"
             android:textAppearance="@style/TextAppearance"
             android:enabled="false"
+            android:checked="true"
             app:layout_constraintTop_toBottomOf="@id/authorizationCheckBox"
             tools:ignore="MissingConstraints" />
 
