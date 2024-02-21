@@ -9,23 +9,36 @@
         <item name="colorSecondaryVariant">@color/teal</item>
         <item name="colorOnSecondary">@color/white</item>
 
-        <item name="switchStyle">@style/Widget.App.Switch</item>
+<!--        <item name="switchStyle">@style/Widget.App.Switch</item>-->
     </style>
 
-    <style name="TextAppearance">
-        <item name="android:textSize">@dimen/button_text_size</item>
+    <style name="ThemeOverlay.MainActivity" parent="Base.Theme.M4_component">
+        <item name="android:padding">@dimen/padding</item>
+        <item name="android:textSize">@dimen/text_size</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
-    <style name="ProgressIndicatorValueTextAppearance" parent="TextAppearance">
-        <item name="android:textSize">@dimen/button_text_size</item>
-        <item name="android:textColor">@color/grey</item>
+    <style name="ThemeOverlay.Profile.Name" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="colorPrimary">@color/teal</item>
+        <item name="counterMaxLength">40</item>
+        <item name="android:textAppearance">@style/TextAppearance</item>
+        <item name="endIconMode">clear_text</item>
+        <item name="errorEnabled">true</item>
+        <item name="counterEnabled">true</item>
     </style>
 
-
-    <style name="MySwitchStyle" parent = "Widget.AppCompat.CompoundButton.Switch">
-        <item name="thumbTint">@sele</item>
+    <style name="ThemeOverlay.Profile.Phone" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:textAppearance">@style/TextAppearance</item>
     </style>
+
+    <style name="TextAppearance">
+        <item name="android:textSize">@dimen/text_size</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+<!--    <style name="MySwitchStyle" parent = "Widget.AppCompat.CompoundButton.Switch">-->
+<!--        <item name="thumbTint"></item>-->
+<!--    </style>-->
 
     <style name="Theme.M4_component" parent="Base.Theme.M4_component" />
 </resources>

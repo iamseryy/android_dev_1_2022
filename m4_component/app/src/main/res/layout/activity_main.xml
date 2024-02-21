@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding">
+        android:theme="ThemeOverlay.MainActivity">
 
         <ImageView
             android:id="@+id/profilePhotoImageView"
@@ -28,30 +28,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/name"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:textAppearance="@style/TextAppearance"
-            app:endIconMode="clear_text"
-            app:errorEnabled="true"
-            app:counterMaxLength="40"
-            app:counterEnabled="true"
+            android:theme="@style/ThemeOverlay.Profile.Name"
             app:layout_constraintTop_toBottomOf="@id/profilePhotoImageView">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nameTextInputEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white" />
+                android:layout_height="wrap_content"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/phoneTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:textAppearance="@style/TextAppearance"
+            style="@style/ThemeOverlay.Profile.Phone"
+
+
             app:boxStrokeColor="@color/grey"
             app:hintTextColor="@color/grey"
-            app:boxBackgroundColor="@color/purple"
             android:textColorHint="@color/grey"
             app:layout_constraintTop_toBottomOf="@id/nameTextInputLayout">
 
@@ -97,7 +90,6 @@
             android:id="@+id/notificationSwitch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.App.Switch"
             android:textAppearance="@style/TextAppearance"
             android:text="@string/receive_notifications"
             android:checked="false"
@@ -141,7 +133,6 @@
             android:id="@+id/progressIndicatorValueTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/ProgressIndicatorValueTextAppearance"
             android:text="@string/_00_100"
             app:layout_constraintBottom_toBottomOf="@+id/progressIndicatorLabelTextView"
             app:layout_constraintEnd_toEndOf="parent"
