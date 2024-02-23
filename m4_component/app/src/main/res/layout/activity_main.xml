@@ -6,21 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="ThemeOverlay.MainActivity">
+        android:orientation="vertical"
+        style="@style/BaseAppStyle">
 
         <ImageView
             android:id="@+id/profilePhotoImageView"
             android:layout_width="@dimen/width_profile_photo"
             android:layout_height="@dimen/height_profile_photo"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
+            style="@style/ProfileImageViewStyle"
             android:src="@drawable/profile_photo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="@string/profile_photo" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -28,115 +25,106 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/name"
-            android:theme="@style/ThemeOverlay.Profile.Name"
-            app:layout_constraintTop_toBottomOf="@id/profilePhotoImageView">
+            style="@style/ProfileNameTextInputLayoutStyle">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nameTextInputEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/BaseTextAppearance"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/phoneTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/ThemeOverlay.Profile.Phone"
-
-
-            app:boxStrokeColor="@color/grey"
-            app:hintTextColor="@color/grey"
-            android:textColorHint="@color/grey"
-            app:layout_constraintTop_toBottomOf="@id/nameTextInputLayout">
+            android:hint="@string/phone"
+            style="@style/ProfilePhoneTextInputLayoutStyle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/phoneTextInputEditText"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:inputType="phone"
-                android:hint="@string/phone"/>
+                android:textAppearance="@style/BaseTextAppearance"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/genderTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance"
             android:text="@string/gender"
-            android:layout_marginTop="@dimen/margin"
-            app:layout_constraintTop_toBottomOf="@id/phoneTextInputLayout" />
+            android:textAppearance="@style/BaseTextAppearance"
+            android:layout_marginTop="@dimen/margin"/>
 
         <RadioGroup
             android:id="@+id/genderRadioGroup"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/genderTextView">
+            android:layout_height="wrap_content">
 
             <RadioButton
                 android:id="@+id/maleRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/male"/>
+                android:text="@string/male"
+                style="@style/ProfileRadioButtonStyle"/>
 
             <RadioButton
                 android:id="@+id/femaleRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/female"/>
+                android:text="@string/female"
+                style="@style/ProfileRadioButtonStyle"/>
         </RadioGroup>
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/notificationSwitch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance"
+            style="@style/ProfileSwitchStyle"
             android:text="@string/receive_notifications"
-            android:checked="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/genderRadioGroup"/>
+            android:checked="false"/>
 
         <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/authorizationCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="@color/design_default_color_secondary"
+            style="@style/ProfileCheckBoxStyle"
             android:text="@string/about_authorization"
-            android:textAppearance="@style/TextAppearance"
             android:enabled="false"
-            app:layout_constraintTop_toBottomOf="@id/notificationSwitch"
             tools:ignore="MissingConstraints" />
 
         <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/aboutNewProductsCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="@color/design_default_color_secondary"
+            style="@style/ProfileCheckBoxStyle"
             android:text="@string/about_new_products"
-            android:textAppearance="@style/TextAppearance"
             android:enabled="false"
-            android:checked="true"
-            app:layout_constraintTop_toBottomOf="@id/authorizationCheckBox"
             tools:ignore="MissingConstraints" />
 
-        <TextView
-            android:id="@+id/progressIndicatorLabelTextView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/progress_label_padding"
-            android:textAppearance="@style/TextAppearance"
-            android:text="@string/points"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/aboutNewProductsCheckBox" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/progressIndicatorValueTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/_00_100"
-            app:layout_constraintBottom_toBottomOf="@+id/progressIndicatorLabelTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/progressIndicatorLabelTextView" />
+            <TextView
+                android:id="@+id/progressIndicatorLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/progress_label_padding"
+                android:layout_weight="1"
+                android:text="@string/points"/>
+
+            <TextView
+                android:id="@+id/progressIndicatorValueTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_weight="1"
+                android:text="@string/_00_100"/>
+        </LinearLayout>
+
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/pointsProgressIndicator"
@@ -148,15 +136,11 @@
             app:trackColor="@color/purple_light"
             tools:ignore="MissingConstraints,NotSibling" />
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/saveButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin"
-            android:enabled="false"
-            android:text="@string/save"
-            android:background="@drawable/selector_button"
-            app:layout_constraintTop_toBottomOf="@id/pointsProgressIndicator"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            style="@style/ProfileButtonStyle"
+            android:text="@string/save"/>
+    </LinearLayout>
 </ScrollView>

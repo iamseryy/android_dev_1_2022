@@ -5,6 +5,6 @@
     <dimen name="margin">16dp</dimen>
     <dimen name="progress_label_padding">8dp</dimen>
     <dimen name="padding">16dp</dimen>
-    <dimen name="text_size">36sp</dimen>
+    <dimen name="text_size">16sp</dimen>
     <dimen name="button_radius">30dp</dimen>
 </resources>

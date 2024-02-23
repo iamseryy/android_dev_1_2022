@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BaseTextAppearance">
+        <item name="android:textSize">@dimen/text_size</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="BaseAppStyle" parent="Base.Theme.M4_component">
+        <item name="android:padding">@dimen/padding</item>
+    </style>
+
+    <style name="ProfileImageViewStyle">
+        <item name="android:background">@color/white</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+    <style name="ProfileNameTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/purple_dark</item>
+        <item name="hintTextColor">@color/purple_dark</item>
+        <item name="counterMaxLength">40</item>
+        <item name="endIconMode">clear_text</item>
+        <item name="errorEnabled">true</item>
+        <item name="counterEnabled">true</item>
+    </style>
+
+    <style name="ProfilePhoneTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">@color/purple</item>
+        <item name="boxStrokeColor">@color/grey</item>
+        <item name="hintTextColor">@color/grey</item>
+    </style>
+
+    <style name="ProfileRadioButtonStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="buttonTint">@color/grey</item>
+    </style>
+
+    <style name="ProfileSwitchStyle" parent = "Widget.AppCompat.CompoundButton.Switch">
+        <item name="thumbTint">@color/selector_switch_thumb</item>
+    </style>
+
+    <style name="ProfileCheckBoxStyle" parent="Widget.MaterialComponents.CompoundButton.CheckBox">
+        <item name="buttonTint">@color/selector_checkbox_tint</item>
+    </style>
+
+    <style name="ProfileButtonStyle" parent="@style/Widget.AppCompat.Button">
+        <item name="android:layout_marginTop">@dimen/margin</item>
+        <item name="android:background">@drawable/selector_button</item>
+        <item name="android:textColor">@color/selector_button_text</item>
+    </style>
+
+</resources>
