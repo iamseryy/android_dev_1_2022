@@ -5,3 +5,4 @@
 |2|**[m2_layout](https://github.com/iamseryy/android_dev_1_2022/tree/main/m2_layout)**|Вёрстка экранов|
 |3|**[m3_constraint](https://github.com/iamseryy/android_dev_1_2022/tree/main/m3_constraint)**|ConstraintLayout|
 |4|**[m4_component](https://github.com/iamseryy/android_dev_1_2022/tree/main/m4_component)**|Основные компоненты пользовательского интерфейса|
+|5|**[m5_quiz_resources](https://github.com/iamseryy/android_dev_1_2022/tree/main/m5_quiz_resources)**|Ресурсы проекта|
