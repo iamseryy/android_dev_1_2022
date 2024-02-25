@@ -9,8 +9,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/welcome_picture"
-        android:contentDescription="@string/welcome_image" />
+        android:contentDescription="@string/welcome_image"
+        android:src="@drawable/welcome_picture" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_continue"
@@ -19,6 +19,6 @@
         android:layout_margin="@dimen/margin"
         android:text="@string/continue_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
