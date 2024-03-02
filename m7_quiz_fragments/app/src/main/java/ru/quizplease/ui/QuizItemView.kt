@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.RadioButton
-import android.widget.Toast
 import ru.quizplease.R
 import ru.quizplease.databinding.QuizItemViewBinding
 
@@ -17,8 +16,7 @@ class QuizItemView (
 
     companion object {
         @JvmStatic
-//        private val quizResult = hashMapOf<String, String>()
-        private val quizResult = hashSetOf<Int>()
+        private val quizResult = hashMapOf<Int, Int>()
     }
 
     init {
@@ -32,9 +30,10 @@ class QuizItemView (
 
     fun setAnswers(answers:List<String>) {
         binding.answersRadioGroup.also {group ->
-            answers.forEach {answer ->
+            group.id = View.generateViewId()
+            answers.forEachIndexed {index, answer ->
                 RadioButton(context).apply {
-                    id = View.generateViewId()
+                    id = index
                     text = answer
                 }.also { group.addView(it) }
             }
@@ -43,8 +42,7 @@ class QuizItemView (
 
     fun setAnswerListener() {
         binding.answersRadioGroup.setOnCheckedChangeListener { radioGroup, i ->
-//            quizResult[binding.questionTextView.text.toString()] = radioGroup.findViewById<RadioButton>(i).text.toString()
-            quizResult.add(i)
+            quizResult[radioGroup.id] = i
         }
     }
 
