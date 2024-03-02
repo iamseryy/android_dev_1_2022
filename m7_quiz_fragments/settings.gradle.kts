@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "m5_quiz_resources"
+rootProject.name = "quizplease"
 include(":app")
  

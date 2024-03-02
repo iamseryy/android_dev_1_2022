@@ -1,4 +1,4 @@
-package com.example.m5_quiz_resources
+package ru.quizplease
 
 import org.junit.Test
 
