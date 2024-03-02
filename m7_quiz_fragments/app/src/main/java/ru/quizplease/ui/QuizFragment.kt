@@ -5,9 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import ru.quizplease.R
 import ru.quizplease.databinding.FragmentQuizBinding
+import ru.quizplease.quiz.Question
+import ru.quizplease.quiz.QuizStorage
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +30,8 @@ class QuizFragment : Fragment() {
 
     private var _binding: FragmentQuizBinding? = null
     private val binding get() = _binding!!
+
+    private val quiz = QuizStorage.getQuiz(QuizStorage.Locale.Ru)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,14 +53,41 @@ class QuizFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        buildQuizView(quiz.questions)
+        setListeners()
+    }
+
+    private fun buildQuizView(questions: List<Question>) {
+        questions.forEachIndexed { index, question ->
+            QuizItemView(requireContext(), null).apply {
+                setQuestion(question.question)
+                setAnswers(question.answers)
+                setAnswerListener()
+                clearQuizResult()
+            }.also {  binding.quizContainer.addView(it, index) }
+        }
+    }
+
+    private fun setListeners() {
         binding.buttonSend.setOnClickListener {
-            findNavController().navigate(R.id.action_quizFragment_to_resultFragment)
+            val quizResult = QuizItemView(requireContext(), null).getQuizResult()
+            if (quizResult.size < quiz.questions.size) {
+                Toast.makeText(context, resources.getString(R.string.all_questions_must_be_answered), Toast.LENGTH_SHORT).show()
+            } else {
+                val bundle = Bundle().apply {
+                    val result = QuizStorage.answer(quiz, quizResult.toList())
+                    putString("quizResult", result)
+                }
+                findNavController().navigate(R.id.action_quizFragment_to_resultFragment, bundle)
+            }
         }
 
         binding.buttonBack.setOnClickListener {
             findNavController().navigate(R.id.action_quizFragment_to_startFragment)
         }
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

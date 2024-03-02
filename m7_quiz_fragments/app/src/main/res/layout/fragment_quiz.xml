@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.QuizFragment">
+    tools:context=".ui.QuizFragment"
+    android:layout_margin="@dimen/margin">
 
     <LinearLayout
         android:id="@+id/quiz_container"
@@ -31,8 +32,6 @@
                 android:layout_weight="1"
                 android:layout_margin="@dimen/margin"
                 android:text="@string/send" />
-
-
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
