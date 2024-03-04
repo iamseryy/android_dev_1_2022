@@ -18,6 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin"
         android:text="@string/start"
+        android:focusable="true"
+        android:clickable="true"
+        android:background="@drawable/start_button_ripple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
