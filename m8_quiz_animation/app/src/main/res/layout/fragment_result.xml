@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.ResultFragment"
     android:orientation="vertical">
 
@@ -13,6 +14,13 @@
         android:textAppearance="@style/BaseTextAppearance"
         android:layout_margin="@dimen/margin"
         />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_view"
+        android:layout_width="wrap_content"
+        android:layout_height="140dp"
+        app:lottie_rawRes="@raw/lottie_anim"
+        app:lottie_autoPlay="true"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_start_again"

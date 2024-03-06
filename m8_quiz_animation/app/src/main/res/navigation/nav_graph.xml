@@ -13,7 +13,11 @@
         <action
             android:id="@+id/action_startFragment_to_quizFragment"
             app:destination="@id/quizFragment"
-            app:launchSingleTop="true"/>
+            app:launchSingleTop="true"
+            app:enterAnim="@anim/slide_from_right_anim"
+            app:exitAnim="@anim/slide_to_left_anim"
+            app:popEnterAnim="@anim/slide_from_left_anim"
+            app:popExitAnim="@anim/slide_to_right_anim"/>
     </fragment>
     <fragment
         android:id="@+id/quizFragment"
@@ -23,12 +27,18 @@
         <action
             android:id="@+id/action_quizFragment_to_resultFragment"
             app:destination="@id/resultFragment"
-            app:popUpTo="@id/startFragment"/>
+            app:popUpTo="@id/startFragment"
+            app:popEnterAnim="@anim/slide_from_left_anim"
+            app:popExitAnim="@anim/slide_to_right_anim"
+            app:enterAnim="@anim/slide_from_right_anim"
+            app:exitAnim="@anim/slide_to_left_anim"/>
         <action
             android:id="@+id/action_quizFragment_to_startFragment"
             app:destination="@id/startFragment"
             app:popUpTo="@id/startFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_from_left_anim"
+            app:exitAnim="@anim/slide_to_right_anim"/>
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
@@ -38,6 +48,10 @@
         <action
             android:id="@+id/action_resultFragment_to_quizFragment"
             app:destination="@id/quizFragment"
-            app:popUpTo="@id/startFragment"/>
+            app:popUpTo="@id/startFragment"
+            app:popEnterAnim="@anim/slide_from_left_anim"
+            app:popExitAnim="@anim/slide_to_right_anim"
+            app:enterAnim="@anim/slide_from_left_anim"
+            app:exitAnim="@anim/slide_to_right_anim"/>
     </fragment>
 </navigation>
