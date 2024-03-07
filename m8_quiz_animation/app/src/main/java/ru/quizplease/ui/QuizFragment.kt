@@ -1,5 +1,7 @@
 package ru.quizplease.ui
 
+import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -39,9 +41,15 @@ class QuizFragment : Fragment() {
         setListeners()
     }
 
+    @SuppressLint("Recycle")
     private fun buildQuizView(questions: List<Question>) {
         questions.forEachIndexed { index, question ->
             QuizItemView(requireContext(), null).apply {
+
+                ObjectAnimator.ofFloat(this, View.ALPHA, 0F, 1F).apply {
+                    duration = 1500L * (index + 1)
+                }.start()
+
                 setQuestion(question.question)
                 setAnswers(question.answers)
                 setAnswerListener()
@@ -51,21 +59,23 @@ class QuizFragment : Fragment() {
     }
 
     private fun setListeners() {
-        binding.buttonSend.setOnClickListener {
-            val quizResult = QuizItemView(requireContext(), null).getQuizResult()
-            if (quizResult.size < quiz.questions.size) {
-                Toast.makeText(context, resources.getString(R.string.all_questions_must_be_answered), Toast.LENGTH_SHORT).show()
-            } else {
-                val bundle = Bundle().apply {
-                    val result = QuizStorage.answer(quiz, quizResult.values.toList())
-                    putString("quizResult", result)
+        binding.apply {
+            buttonSend.setOnClickListener {
+                val quizResult = QuizItemView(requireContext(), null).getQuizResult()
+                if (quizResult.size < quiz.questions.size) {
+                    Toast.makeText(context, resources.getString(R.string.all_questions_must_be_answered), Toast.LENGTH_SHORT).show()
+                } else {
+                    val bundle = Bundle().apply {
+                        val result = QuizStorage.answer(quiz, quizResult.values.toList())
+                        putString("quizResult", result)
+                    }
+                    findNavController().navigate(R.id.action_quizFragment_to_resultFragment, bundle)
                 }
-                findNavController().navigate(R.id.action_quizFragment_to_resultFragment, bundle)
             }
-        }
 
-        binding.buttonBack.setOnClickListener {
-            findNavController().navigate(R.id.action_quizFragment_to_startFragment)
+            buttonBack.setOnClickListener {
+                findNavController().navigate(R.id.action_quizFragment_to_startFragment)
+            }
         }
     }
 

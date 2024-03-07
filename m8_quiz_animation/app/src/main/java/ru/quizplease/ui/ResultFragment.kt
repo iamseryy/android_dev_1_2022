@@ -3,8 +3,6 @@ package ru.quizplease.ui
 import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.content.res.Resources.Theme
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,7 +11,6 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat.getColor
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import ru.quizplease.R
@@ -47,17 +44,15 @@ class ResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.resultTextview.apply{
-            text = quizResult
-            animateText(this)
-        }
+        binding.apply {
+            resultTextview.text = quizResult
+            animateText(resultTextview)
 
-        binding.buttonStartAgain.apply {
-            setOnClickListener {
+            buttonStartAgain.setOnClickListener {
                 findNavController().navigate(R.id.action_resultFragment_to_quizFragment)
+            }.also {
+                animateButton(buttonStartAgain)
             }
-        }.also {
-            animateButton(it)
         }
     }
 
