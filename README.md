@@ -8,3 +8,4 @@
 |5|**[m5_quiz_resources](https://github.com/iamseryy/android_dev_1_2022/tree/main/m5_quiz_resources)**|Ресурсы проекта|
 |6|**[m7_quiz_fragments](https://github.com/iamseryy/android_dev_1_2022/tree/main/m7_quiz_fragments)**|Фрагменты|
 |7|**[m8_quiz_animation](https://github.com/iamseryy/android_dev_1_2022/tree/main/m8_quiz_animation)**|Анимация|
+|8|**[m9_quiz_localization](https://github.com/iamseryy/android_dev_1_2022/tree/main/m9_quiz_localization)**|Локализация приложений|

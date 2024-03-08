@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">QUIZ Please</string>
+    <string name="welcome_image">Welcome image</string>
+    <string name="back">Назад</string>
+    <string name="send">Отправить</string>
+    <string name="start_again">Начать заново</string>
+    <string name="start">Начать</string>
+    <string name="all_questions_must_be_answered">Необходимо ответить на все вопросы</string>
+</resources>
