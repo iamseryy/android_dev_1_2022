@@ -1,15 +1,13 @@
 package ru.quizplease.quiz
 
+import java.util.Locale
+
 
 object QuizStorage {
 
     fun getQuiz(locale: Locale): Quiz = when (locale) {
-        Locale.Ru -> quizRu
-        Locale.En -> quizEn
-    }
-
-    enum class Locale {
-        Ru, En
+        Locale("ru", "RU") -> quizRu
+        else -> quizEn
     }
 
     fun answer(quiz: Quiz, answers: List<Int>): String =

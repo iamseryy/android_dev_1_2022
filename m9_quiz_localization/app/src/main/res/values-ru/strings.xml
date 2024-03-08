@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="back">Назад</string>
+    <string name="send">Отправить</string>
+    <string name="start_again">Начать заново</string>
+    <string name="start">Начать</string>
+    <string name="all_questions_must_be_answered">Необходимо ответить на все вопросы</string>
+    <string name="enter_birth_date">Введите дату рождения</string>
+    <string name="select_your_date_of_birth">Выберите дату своего рождения</string>
+</resources>

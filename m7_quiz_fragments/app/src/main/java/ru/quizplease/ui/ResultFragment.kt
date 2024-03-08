@@ -36,9 +36,12 @@ class ResultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.resultTextview.text = quizResult
-        binding.buttonStartAgain.setOnClickListener {
-            findNavController().navigate(R.id.action_resultFragment_to_quizFragment)
+        binding.apply {
+            resultTextview.text = quizResult
+
+            buttonStartAgain.setOnClickListener {
+                findNavController().navigate(R.id.action_resultFragment_to_quizFragment)
+            }
         }
     }
 

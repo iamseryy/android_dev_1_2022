@@ -13,13 +13,14 @@ import ru.quizplease.R
 import ru.quizplease.databinding.FragmentQuizBinding
 import ru.quizplease.quiz.Question
 import ru.quizplease.quiz.QuizStorage
+import java.util.Locale
 
 
 class QuizFragment : Fragment() {
     private var _binding: FragmentQuizBinding? = null
     private val binding get() = _binding!!
 
-    private val quiz = QuizStorage.getQuiz(QuizStorage.Locale.Ru)
+    private val quiz = QuizStorage.getQuiz(Locale.getDefault())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,6 @@ class QuizFragment : Fragment() {
         setListeners()
     }
 
-    @SuppressLint("Recycle")
     private fun buildQuizView(questions: List<Question>) {
         questions.forEachIndexed { index, question ->
             QuizItemView(requireContext(), null).apply {
@@ -66,8 +66,9 @@ class QuizFragment : Fragment() {
                     Toast.makeText(context, resources.getString(R.string.all_questions_must_be_answered), Toast.LENGTH_SHORT).show()
                 } else {
                     val bundle = Bundle().apply {
-                        val result = QuizStorage.answer(quiz, quizResult.values.toList())
-                        putString("quizResult", result)
+                        QuizStorage.answer(quiz, quizResult.values.toList()).apply {
+                            putString("quizResult", this)
+                        }
                     }
                     findNavController().navigate(R.id.action_quizFragment_to_resultFragment, bundle)
                 }

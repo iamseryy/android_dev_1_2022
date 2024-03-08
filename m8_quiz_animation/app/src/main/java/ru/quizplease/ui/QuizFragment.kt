@@ -66,8 +66,9 @@ class QuizFragment : Fragment() {
                     Toast.makeText(context, resources.getString(R.string.all_questions_must_be_answered), Toast.LENGTH_SHORT).show()
                 } else {
                     val bundle = Bundle().apply {
-                        val result = QuizStorage.answer(quiz, quizResult.values.toList())
-                        putString("quizResult", result)
+                        QuizStorage.answer(quiz, quizResult.values.toList()).apply {
+                            putString("quizResult", this)
+                        }
                     }
                     findNavController().navigate(R.id.action_quizFragment_to_resultFragment, bundle)
                 }

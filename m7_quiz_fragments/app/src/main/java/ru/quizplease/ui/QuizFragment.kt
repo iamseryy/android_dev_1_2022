@@ -51,21 +51,24 @@ class QuizFragment : Fragment() {
     }
 
     private fun setListeners() {
-        binding.buttonSend.setOnClickListener {
-            val quizResult = QuizItemView(requireContext(), null).getQuizResult()
-            if (quizResult.size < quiz.questions.size) {
-                Toast.makeText(context, resources.getString(R.string.all_questions_must_be_answered), Toast.LENGTH_SHORT).show()
-            } else {
-                val bundle = Bundle().apply {
-                    val result = QuizStorage.answer(quiz, quizResult.values.toList())
-                    putString("quizResult", result)
+        binding.apply {
+            buttonSend.setOnClickListener {
+                val quizResult = QuizItemView(requireContext(), null).getQuizResult()
+                if (quizResult.size < quiz.questions.size) {
+                    Toast.makeText(context, resources.getString(R.string.all_questions_must_be_answered), Toast.LENGTH_SHORT).show()
+                } else {
+                    val bundle = Bundle().apply {
+                        QuizStorage.answer(quiz, quizResult.values.toList()).apply {
+                            putString("quizResult", this)
+                        }
+                    }
+                    findNavController().navigate(R.id.action_quizFragment_to_resultFragment, bundle)
                 }
-                findNavController().navigate(R.id.action_quizFragment_to_resultFragment, bundle)
             }
-        }
 
-        binding.buttonBack.setOnClickListener {
-            findNavController().navigate(R.id.action_quizFragment_to_startFragment)
+            buttonBack.setOnClickListener {
+                findNavController().navigate(R.id.action_quizFragment_to_startFragment)
+            }
         }
     }
 
