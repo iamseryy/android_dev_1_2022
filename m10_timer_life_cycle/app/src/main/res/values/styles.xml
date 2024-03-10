@@ -10,6 +10,12 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="ProgressBarCircleStyle">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/progress_bar_circle</item>
+        <item name="android:rotation">-90</item>
+    </style>
+
     <style name="StartButtonAppearance" parent="MaterialAlertDialog.Material3.Title.Text">
         <item name="android:textSize">@dimen/start_button_font_size</item>
         <item name="android:textStyle">bold</item>
