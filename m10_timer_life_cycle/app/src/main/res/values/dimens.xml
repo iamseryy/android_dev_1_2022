@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="progress_bar_width">150</dimen>
+    <dimen name="progress_bar_height">150</dimen>
+    <dimen name="main_margin">20dp</dimen>
+    <dimen name="timer_title_margin_top">20dp</dimen>
+    <dimen name="progress_bar_margin_top">50dp</dimen>
+    <dimen name="progress_value">100</dimen>
+    <dimen name="title_font_size">34sp</dimen>
+    <dimen name="counter_font_size">40sp</dimen>
+    <dimen name="start_button_width">150</dimen>
+</resources>
