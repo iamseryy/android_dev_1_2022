@@ -11,9 +11,17 @@
     </style>
 
     <style name="ProgressBarCircleStyle">
+        <item name="android:layout_marginTop">@dimen/margin</item>
         <item name="android:indeterminateOnly">false</item>
         <item name="android:progressDrawable">@drawable/progress_bar_circle</item>
         <item name="android:rotation">-90</item>
+    </style>
+
+    <style name="SliderStyle" parent="Widget.Material3.Slider">
+        <item name="android:stepSize">@dimen/slider_step_size</item>
+        <item name="android:valueFrom">@dimen/slider_value_from</item>
+        <item name="android:valueTo">@dimen/slider_value_to</item>
+        <item name="android:value">@dimen/slider_value_default</item>
     </style>
 
     <style name="StartButtonAppearance" parent="MaterialAlertDialog.Material3.Title.Text">

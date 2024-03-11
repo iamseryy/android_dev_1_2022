@@ -2,10 +2,14 @@
 <resources>
     <dimen name="progress_bar_width">200dp</dimen>
     <dimen name="progress_bar_height">200dp</dimen>
-    <dimen name="margin">20dp</dimen>
+    <dimen name="margin">15dp</dimen>
     <dimen name="progress_value">100</dimen>
     <dimen name="title_font_size">34sp</dimen>
     <dimen name="counter_font_size">40sp</dimen>
     <dimen name="start_button_font_size">20sp</dimen>
     <dimen name="start_button_width">200dp</dimen>
+    <dimen name="slider_step_size">10.0</dimen>
+    <dimen name="slider_value_from">10.0</dimen>
+    <dimen name="slider_value_to">60.0</dimen>
+    <dimen name="slider_value_default">10</dimen>
 </resources>

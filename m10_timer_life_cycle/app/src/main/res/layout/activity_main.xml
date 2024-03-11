@@ -22,17 +22,18 @@
             android:id="@+id/counter_progress_bar"
             android:layout_width="@dimen/progress_bar_width"
             android:layout_height="@dimen/progress_bar_height"
-            android:layout_marginTop="@dimen/margin"
             style="@style/ProgressBarCircleStyle"
+            android:progress="100"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/timer_title_textview"/>
 
         <TextView
-            android:id="@+id/counter_text"
+            android:id="@+id/counter_value_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/CounterAppearance"
+            android:text="@string/_10"
             app:layout_constraintTop_toTopOf="@id/counter_progress_bar"
             app:layout_constraintStart_toStartOf="@id/counter_progress_bar"
             app:layout_constraintBottom_toBottomOf="@id/counter_progress_bar"
@@ -42,10 +43,7 @@
             android:id="@+id/counter_slider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stepSize="10.0"
-            android:valueFrom="10.0"
-            android:valueTo="60.0"
-            android:layout_marginTop="@dimen/margin"
+            style="@style/SliderStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/counter_progress_bar" />
