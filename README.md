@@ -10,3 +10,5 @@
 |7|**[m8_quiz_animation](https://github.com/iamseryy/android_dev_1_2022/tree/main/m8_quiz_animation)**|Анимация|
 |8|**[m9_quiz_localization](https://github.com/iamseryy/android_dev_1_2022/tree/main/m9_quiz_localization)**|Локализация приложений|
 |9|**[m10_timer_life_cycle](https://github.com/iamseryy/android_dev_1_2022/tree/main/m10_timer_life_cycle)**|Жизненный цикл приложения|
+|10|**[m11_timer_data_storage](https://github.com/iamseryy/android_dev_1_2022/tree/main/m11_timer_data_storage)**|Основы хранения данных|
+|11|**[m12_mvvm](https://github.com/iamseryy/android_dev_1_2022/tree/main/m12_mvvm)**|Архитектура презентационного слоя|
