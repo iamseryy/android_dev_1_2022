@@ -5,6 +5,15 @@
     </style>
 
     <style name="ButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">@dimen/margin</item>
+    </style>
+
+    <style name="ProgressBarStyle">
+        <item name="android:layout_margin">@dimen/margin</item>
+    </style>
+
+    <style name="ResultTextViewStyle">
         <item name="android:layout_margin">@dimen/margin</item>
     </style>
 </resources>
