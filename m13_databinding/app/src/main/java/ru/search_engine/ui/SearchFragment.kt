@@ -16,19 +16,23 @@ import ru.search_engine.R
 import ru.search_engine.databinding.FragmentSearchBinding
 
 class SearchFragment : Fragment() {
-    private lateinit var binding: FragmentSearchBinding
+    private var _binding: FragmentSearchBinding? = null
+    private val binding get() = _binding!!
     private val viewModel: SearchViewModel by viewModels{SearchViewModalFactory()}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSearchBinding.inflate(layoutInflater)
+        _binding = FragmentSearchBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.viewModal = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         viewModel.setSearchResult(resources.getString(R.string.search_results))
 
@@ -42,28 +46,28 @@ class SearchFragment : Fragment() {
                 viewModel.onTextChanged(text?.length!!)
             }
 
-            viewLifecycleOwner.lifecycleScope.launch {
-                viewModel.state.collect{ state ->
-                    when(state){
-                        State.SearchPrepare -> {
-                            searchButton.isEnabled = false
-                            progressBar.isVisible = false
-                        }
-                        State.Searching -> {
-                            progressBar.isVisible = true
-                            searchButton.isEnabled = false
-                        }
-                        is State.SearchFinish -> {
-                            progressBar.isVisible = false
-                            searchButton.isEnabled = true
-                        }
-                        State.SearchTextChange -> {
-                            searchButton.isEnabled = false
-                            progressBar.isVisible = false
-                        }
-                    }
-                }
-            }
+//            viewLifecycleOwner.lifecycleScope.launch {
+//                viewModel.state.collect{ state ->
+//                    when(state){
+//                        State.SearchPrepare -> {
+//                            searchButton.isEnabled = false
+//                            progressBar.isVisible = false
+//                        }
+//                        State.Searching -> {
+//                            progressBar.isVisible = true
+//                            searchButton.isEnabled = false
+//                        }
+//                        is State.SearchFinish -> {
+//                            progressBar.isVisible = false
+//                            searchButton.isEnabled = true
+//                        }
+//                        State.SearchTextChange -> {
+//                            searchButton.isEnabled = false
+//                            progressBar.isVisible = false
+//                        }
+//                    }
+//                }
+//            }
 
             viewLifecycleOwner.lifecycleScope.launch {
                 viewModel.buttonEnabled.collect { isEnabled ->
@@ -82,5 +86,10 @@ class SearchFragment : Fragment() {
     fun View.hideKeyBoard(){
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

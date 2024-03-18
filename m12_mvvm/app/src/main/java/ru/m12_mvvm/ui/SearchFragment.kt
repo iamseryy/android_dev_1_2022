@@ -16,14 +16,15 @@ import ru.m12_mvvm.R
 import ru.m12_mvvm.databinding.FragmentSearchBinding
 
 class SearchFragment : Fragment() {
-    private lateinit var binding: FragmentSearchBinding
+    private var _binding: FragmentSearchBinding? = null
+    private val binding get() = _binding!!
     private val viewModel: SearchViewModel by viewModels{SearchViewModalFactory()}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSearchBinding.inflate(layoutInflater)
+        _binding = FragmentSearchBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -82,5 +83,10 @@ class SearchFragment : Fragment() {
     fun View.hideKeyBoard(){
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
