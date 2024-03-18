@@ -12,3 +12,4 @@
 |9|**[m10_timer_life_cycle](https://github.com/iamseryy/android_dev_1_2022/tree/main/m10_timer_life_cycle)**|Жизненный цикл приложения|
 |10|**[m11_timer_data_storage](https://github.com/iamseryy/android_dev_1_2022/tree/main/m11_timer_data_storage)**|Основы хранения данных|
 |11|**[m12_mvvm](https://github.com/iamseryy/android_dev_1_2022/tree/main/m12_mvvm)**|Архитектура презентационного слоя|
+|12|**[m13_databinding](https://github.com/iamseryy/android_dev_1_2022/tree/main/m13_databinding)**|Data Binding|
