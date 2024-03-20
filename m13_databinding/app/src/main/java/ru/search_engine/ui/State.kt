@@ -1,10 +1,6 @@
 package ru.search_engine.ui
 
-sealed class State {
-    object SearchPrepare: State()
-    object Searching: State()
-    data class SearchFinish(val searchText: String) : State()
-    object SearchTextChange: State()
-
-
+sealed class State (open val searchResult: String? = null) {
+    data class Searching(override val searchResult: String?) : State(searchResult = searchResult)
+    data class SearchFinish(override val searchResult: String?) : State(searchResult = searchResult)
 }
