@@ -1,5 +1,7 @@
 package ru.user_profile.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Results(
-    val results: List<User>
+    @SerializedName("results") val results: List<User>
 )
