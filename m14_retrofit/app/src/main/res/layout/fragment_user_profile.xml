@@ -16,13 +16,13 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/name_text_view"
+        android:id="@+id/profile_details_text_view"
         style="@style/UserProfileTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/update_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_image_view" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/update_button"
@@ -33,5 +33,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/ProgressBarStyle"
+        app:layout_constraintBottom_toBottomOf="@+id/update_button"
+        app:layout_constraintStart_toEndOf="@+id/update_button"
+        app:layout_constraintTop_toTopOf="@+id/update_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

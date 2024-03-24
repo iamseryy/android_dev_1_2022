@@ -3,16 +3,16 @@ package ru.user_profile.model
 import com.google.gson.annotations.SerializedName
 
 data class User(
-    @SerializedName("gender") val gender: Gender,
+    @SerializedName("gender") val gender: String,
     @SerializedName("name") val name: Name,
-//    val location: Location,
-//    val email: String,
-//    val login: Login,
-//    val dob: ProfileDate,
-//    val registered: ProfileDate,
-//    val phone: String,
-//    val cell: String,
-//    val id: Id,
-//    val picture: Picture,
-//    val nat: String
+    @SerializedName("location") val location: Location,
+    @SerializedName("email") val email: String,
+    @SerializedName("login") val login: Login,
+//    @SerializedName("dob") val dob: ProfileDate,
+//    @SerializedName("registered") val registered: ProfileDate,
+    @SerializedName("phone") val phone: String,
+    @SerializedName("cell") val cell: String,
+    @SerializedName("id") val id: Id,
+    @SerializedName("picture") val picture: Picture,
+    @SerializedName("nat") val nat: String
 )
