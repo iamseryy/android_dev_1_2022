@@ -42,8 +42,8 @@ class UserProfileFragment : Fragment() {
             }
 
             viewLifecycleOwner.lifecycleScope.launch {
-                viewModel.state.collect {state ->
-                    when(state) {
+                viewModel.state.collect {
+                    when(it) {
                         State.Loading -> {
                             progressBar.isVisible = true
                             updateButton.isEnabled = false
@@ -63,16 +63,17 @@ class UserProfileFragment : Fragment() {
             }
 
             viewLifecycleOwner.lifecycleScope.launch {
-                viewModel.resultsFlow.collect {results ->
-                    results?.results?.first()?.apply {
+                viewModel.resultsFlow.collect {
+                    it?.results?.first()?.apply {
 
                         profileDetailsTextView.text = """
                             Login: ${login.username}
                             Name: ${name.title} ${name.first} ${name.last}
-                            Age: $do
+                            Age: ${dob.age}
                             Email: $email
                             Phone: $phone
                             Cell: $cell
+                            Location: ${location.country}, ${location.state}, ${location.street.name} ${location.street.number} 
                         """.trimIndent()
 
                         Glide.with(view)
