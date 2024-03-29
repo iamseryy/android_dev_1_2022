@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name" translatable="false">word_counter</string>
+    <string name="add">Add</string>
+    <string name="clear">Clear</string>
+    <string name="enter_a_word">Enter a word</string>
+    <string name="only_letters_hyphens_allowed">Only letters and hyphens are allowed</string>
+</resources>

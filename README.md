@@ -14,3 +14,4 @@
 |11|**[m12_mvvm](https://github.com/iamseryy/android_dev_1_2022/tree/main/m12_mvvm)**|Архитектура презентационного слоя|
 |12|**[m13_databinding](https://github.com/iamseryy/android_dev_1_2022/tree/main/m13_databinding)**|Data Binding|
 |13|**[m14_retrofit](https://github.com/iamseryy/android_dev_1_2022/tree/main/m14_retrofit)**|Работа с сетью|
+|14|**[m15_room](https://github.com/iamseryy/android_dev_1_2022/tree/main/m15_room)**|Работа с БД (Room)|

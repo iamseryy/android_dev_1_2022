@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add">Добавить</string>
+    <string name="clear">Очистить</string>
+    <string name="enter_a_word">Введите слово</string>
+    <string name="only_letters_hyphens_allowed">Допустимы только буквы и дефисы</string>
+</resources>
