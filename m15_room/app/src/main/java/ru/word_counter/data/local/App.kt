@@ -12,7 +12,7 @@ class App: Application() {
         db = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java,
-            "wordcounterdb"
+            "word_counter_db"
         ).build()
     }
 }

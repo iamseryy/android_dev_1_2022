@@ -10,11 +10,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import ru.word_counter.R
 import ru.word_counter.data.local.App
 import ru.word_counter.databinding.FragmentWordCounterBinding
+import ru.word_counter.ui.viewmodel.State
 import ru.word_counter.ui.viewmodel.WordCounterViewModel
 
 
@@ -22,7 +22,7 @@ class WordCounterFragment : Fragment() {
     private var _binding: FragmentWordCounterBinding? = null
     private val binding get() = _binding!!
 
-    private val wordCounterViewModel: WordCounterViewModel by viewModels {
+    private val viewModel: WordCounterViewModel by viewModels {
         object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 val wordDao = (requireContext().applicationContext as App).db.wordDao()
@@ -44,24 +44,37 @@ class WordCounterFragment : Fragment() {
 
         binding.apply {
             searchInputEditText.doOnTextChanged{text, _, _, _ ->
-                wordCounterViewModel.onTextChanged(text)
+                viewModel.onTextChanged(text)
             }
 
             addButton.setOnClickListener {
-                wordCounterViewModel.onAdd(searchInputEditText.text.toString())
+                viewModel.onAdd(searchInputEditText.text.toString())
             }
 
             clearButton.setOnClickListener {
-                wordCounterViewModel.onClear()
+                viewModel.onClear()
             }
-        }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            wordCounterViewModel.isWordValid.collect {isTextValid ->
-                if(!isTextValid) {
-                    Snackbar
-                        .make(view, resources.getString(R.string.only_letters_hyphens_allowed), Snackbar.LENGTH_SHORT)
-                        .show()
+            lifecycleScope.launch {
+                viewModel.firstFiveWord.collect {
+                    wordListTextview.text = it.joinToString(separator = "\n")
+                }
+            }
+
+            lifecycleScope.launch {
+                viewModel.state.collect {
+                    when (it) {
+                        State.Ok -> {
+                            addButton.isEnabled = true
+                            searchInputLayout.isErrorEnabled = false
+                        }
+
+                        State.Error -> {
+                            addButton.isEnabled = false
+                            searchInputLayout.isErrorEnabled = true
+                            searchInputLayout.error = resources.getString(R.string.only_letters_hyphens_allowed)
+                        }
+                    }
                 }
             }
         }
