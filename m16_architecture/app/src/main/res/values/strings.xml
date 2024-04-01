@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">bored</string>
+    <string name="app_name" translatable="false">bored</string>
+    <string name="refresh">refresh</string>
 </resources>
