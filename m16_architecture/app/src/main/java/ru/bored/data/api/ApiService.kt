@@ -6,6 +6,6 @@ import ru.bored.data.UsefulActivityDto
 
 
 interface ApiService {
-    @GET("/api/")
-    suspend fun getRandomUser() : UsefulActivityDto
+    @GET("activity/")
+    suspend fun getRandomUsefulActivity() : UsefulActivityDto
 }
