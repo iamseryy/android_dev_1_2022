@@ -1,10 +1,11 @@
-package ru.bored.data.api
+package com.photosofmars.data.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-private const val BASE_URL = "https://www.boredapi.com/api/"
+private const val BASE_URL = "https://api.nasa.gov"
+
 object RetrofitBuilder {
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
