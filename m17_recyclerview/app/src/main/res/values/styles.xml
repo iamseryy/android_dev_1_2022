@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CardStyle">
+        <item name="android:layout_marginBottom">@dimen/margin</item>
+    </style>
+
+    <style name="PhotoTextStyle">
+        <item name="android:padding">@dimen/padding</item>
+    </style>
+
+    <style name="PhotoTextAppearance">
+        <item name="android:textSize">@dimen/text_size</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+</resources>
+

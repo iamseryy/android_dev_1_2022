@@ -2,4 +2,8 @@
     <string name="app_name">photos of mars</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rover">Rover</string>
+    <string name="camera">Camera</string>
+    <string name="sol">Sol</string>
+    <string name="date">Date</string>
 </resources>
