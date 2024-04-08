@@ -1,8 +1,10 @@
 package com.photosofmars.presentation.adapter
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.photosofmars.R
@@ -42,6 +44,17 @@ class ListPhotoAdapter(): RecyclerView.Adapter<ListPhotoHolder>() {
             solTextView.text = "${holder.itemView.context.getString(R.string.sol)}: ${photo?.sol}"
             cameraTextView.text = "${holder.itemView.context.getString(R.string.camera)}: ${photo?.camera?.name}"
             dateTextView.text = "${holder.itemView.context.getString(R.string.date)}: ${photo?.date}"
+        }
+
+        holder.itemView.setOnClickListener {
+            val bundle = Bundle().apply {
+                putString("photo", photo?.imgSrc)
+                putString("rover", holder.binding.roverTextView.text.toString())
+                putString("camera", holder.binding.cameraTextView.text.toString())
+                putString("sol", holder.binding.solTextView.text.toString())
+                putString("date", holder.binding.dateTextView.text.toString())
+            }
+            holder.itemView.findNavController().navigate(R.id.action_listPhotoFragment_to_photoFragment, bundle)
         }
     }
 
