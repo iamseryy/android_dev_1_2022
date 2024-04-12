@@ -1,48 +1,39 @@
 package com.attractions.presentation.view
 
 
-
-import android.Manifest
-import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.camera.core.ImageCapture
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.core.content.ContextCompat
-
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.attractions.R
 import com.attractions.databinding.FragmentListPhotoBinding
-import com.google.android.material.snackbar.Snackbar
-import java.util.concurrent.Executor
+import com.attractions.entity.Photo
+import com.attractions.presentation.adapter.ListPhotoAdapter
+import com.attractions.presentation.viewmodel.ListPhotoViewModel
+import com.attractions.presentation.viewmodel.ListPhotoViewModelFactory
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
 
 
+@AndroidEntryPoint
 class ListPhotoFragment : Fragment() {
+
+    @Inject
+    lateinit var listPhotoViewModelFactory: ListPhotoViewModelFactory
+    private val viewModel: ListPhotoViewModel by viewModels { listPhotoViewModelFactory }
+
     private var _binding: FragmentListPhotoBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var executor: Executor
-    private lateinit var imageCapture: ImageCapture
-
-
-
-
-    private val launcher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-            startCamera()
-            view?.let { Snackbar.make(it, "permission is $isGranted", Snackbar.LENGTH_SHORT).show() }
-        }
-
-    private fun checkPermissions() {
-        if (context?.let { ContextCompat.checkSelfPermission(it, Manifest.permission.CAMERA) } == PackageManager.PERMISSION_GRANTED) {
-            startCamera()
-            view?.let { Snackbar.make(it, "permission is Granted", Snackbar.LENGTH_SHORT).show() }
-        } else {
-            launcher.launch(Manifest.permission.CAMERA)
-        }
-    }
+    private val listPhotoAdapter = ListPhotoAdapter(onItemClicked = { photo -> onItemClicked(photo)})
 
 
     override fun onCreateView(
@@ -56,26 +47,24 @@ class ListPhotoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        executor = context?.let { ContextCompat.getMainExecutor(it) }!!
+        binding.photosRecyclerview.adapter = listPhotoAdapter
 
-        checkPermissions()
+        viewModel.photos.onEach {
+            listPhotoAdapter.submitList(it)
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
 
-        binding.button.setOnClickListener {
-            takePhoto()
+
+        binding.takePhotoButton.setOnClickListener {
+            findNavController().navigate(R.id.action_listPhotoFragment_to_photographFragment)
         }
 
-
-
     }
 
-    private fun takePhoto() {
-        TODO("Not yet implemented")
-    }
-
-    private fun startCamera() {
-        context?.let { ProcessCameraProvider.getInstance(it) }?.addListener({
-            val cameraProvider = it.
-        }, executor)
+    private fun onItemClicked(photo: Photo) {
+        val bundle = Bundle().apply {
+            putString("uri", photo.uri)
+        }
+        findNavController().navigate(R.id.action_listPhotoFragment_to_photoFragment, bundle)
     }
 
 

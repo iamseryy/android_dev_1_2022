@@ -7,22 +7,25 @@
     tools:context=".presentation.view.ListPhotoFragment">
 
 
-    <androidx.camera.view.PreviewView
-        android:id="@+id/finder_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/photos_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    
-    <Button
-        android:id="@+id/button"
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/take_photo_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="take photo"
+        android:layout_margin="@dimen/margin"
+        android:src="@drawable/baseline_add_a_photo_24"
+        android:contentDescription="@string/add_photo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:shapeAppearance="?attr/circleRadius" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

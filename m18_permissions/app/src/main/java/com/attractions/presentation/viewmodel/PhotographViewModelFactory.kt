@@ -5,13 +5,13 @@ import androidx.lifecycle.ViewModelProvider
 import javax.inject.Inject
 
 
-class ListPhotoViewModelFactory @Inject constructor(
-    private val listPhotoViewModel: ListPhotoViewModel
+class PhotographViewModelFactory @Inject constructor(
+    private val photographViewModel: PhotographViewModel
 ): ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ListPhotoViewModel::class.java)) {
-            return listPhotoViewModel as T
+        if (modelClass.isAssignableFrom(PhotographViewModel::class.java)) {
+            return photographViewModel as T
         }
 
         throw IllegalArgumentException("Unknown class name")
