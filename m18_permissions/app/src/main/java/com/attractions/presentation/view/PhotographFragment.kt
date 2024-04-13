@@ -18,8 +18,9 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.attractions.R
-import com.attractions.databinding.FragmentListPhotoBinding
 import com.attractions.databinding.FragmentPhotographBinding
 import com.attractions.entity.Photo
 import com.attractions.presentation.viewmodel.PhotographViewModel
@@ -27,6 +28,7 @@ import com.attractions.presentation.viewmodel.PhotographViewModelFactory
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.Executor
@@ -34,6 +36,8 @@ import javax.inject.Inject
 
 
 private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss"
+private const val DATE_PHOTO_FORMAT = "yyyy-MM-dd"
+private const val TYPE = "image/jpeg"
 
 
 @AndroidEntryPoint
@@ -48,16 +52,23 @@ class PhotographFragment : Fragment() {
 
     private lateinit var executor: Executor
     private var imageCapture: ImageCapture? = null
-    private val name = SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis())
+    private val name =
+        SimpleDateFormat(FILENAME_FORMAT, Locale.getDefault()).format(System.currentTimeMillis())
 
-
+    private lateinit var newPhoto: Photo
 
     private val launcher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
             if (map.values.all { it }) {
                 startCamera()
             } else {
-                view?.let { Snackbar.make(it, resources.getString(R.string.permission_is_not_granted), Snackbar.LENGTH_SHORT).show() }
+                view?.let {
+                    Snackbar.make(
+                        it,
+                        resources.getString(R.string.permission_is_not_granted),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
 
@@ -77,16 +88,31 @@ class PhotographFragment : Fragment() {
 
         checkPermissions()
 
-        binding.button.setOnClickListener {
-            takePhoto()
+        binding.apply {
+            takePhotoButton.setOnClickListener {
+                takePhoto()
+            }
+
+            imagePreview.setOnClickListener {
+                val bundle = Bundle().apply {
+                    putString("uri", newPhoto.uri)
+                    putString("date", SimpleDateFormat(DATE_PHOTO_FORMAT, Locale.getDefault()).format(newPhoto.date.time))
+                }
+                findNavController().navigate(R.id.action_photographFragment_to_photoFragment, bundle)
+            }
         }
     }
 
     private fun checkPermissions() {
         val isAllGranted = PhotographFragment.REQUEST_PERMISSIONS.all { permission ->
-            context?.let { ContextCompat.checkSelfPermission(it, permission) } == PackageManager.PERMISSION_GRANTED
+            context?.let {
+                ContextCompat.checkSelfPermission(
+                    it,
+                    permission
+                )
+            } == PackageManager.PERMISSION_GRANTED
         }
-        if ( isAllGranted ) {
+        if (isAllGranted) {
             startCamera()
         } else {
             launcher.launch(PhotographFragment.REQUEST_PERMISSIONS)
@@ -99,7 +125,7 @@ class PhotographFragment : Fragment() {
 
         val contentValues = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, name)
-            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+            put(MediaStore.MediaColumns.MIME_TYPE, TYPE)
         }
 
         val outputOption = ImageCapture.OutputFileOptions
@@ -109,27 +135,27 @@ class PhotographFragment : Fragment() {
                 contentValues
             )
             .build()
-
-        imageCapture.takePicture(
-            outputOption,
-            executor,
-            object : ImageCapture.OnImageSavedCallback {
-                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    view?.let {
-                        Glide.with(it)
+        lifecycleScope.launch {
+            imageCapture.takePicture(
+                outputOption,
+                executor,
+                object : ImageCapture.OnImageSavedCallback {
+                    override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                        Glide.with(requireActivity())
                             .load(outputFileResults.savedUri)
                             .circleCrop()
                             .into(binding.imagePreview)
+                        newPhoto = Photo(outputFileResults.savedUri.toString())
+                        viewModel.insertPhoto(newPhoto)
+                    }
 
-                        viewModel.insertPhoto(Photo(outputFileResults.savedUri.toString()))
+                    override fun onError(exception: ImageCaptureException) {
+                        exception.printStackTrace()
                     }
                 }
+            )
+        }
 
-                override fun onError(exception: ImageCaptureException) {
-                    exception.printStackTrace()
-                }
-            }
-        )
     }
 
     private fun startCamera() {

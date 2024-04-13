@@ -1,21 +1,23 @@
 package com.attractions.presentation.adapter
 
-import android.annotation.SuppressLint
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.attractions.R
 import com.attractions.databinding.FragmentItemListPhotoBinding
 import com.attractions.entity.Photo
 import com.bumptech.glide.Glide
+import java.text.SimpleDateFormat
+import java.util.Locale
 
+
+private const val FORMAT = "yyyy-MM-dd"
 
 class ListPhotoAdapter(
     private val onItemClicked: (Photo) -> Unit
-): ListAdapter<Photo, ListPhotoHolder>(DiffCallback) {
+): ListAdapter<Photo, ListPhotoAdapter.ListPhotoHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListPhotoHolder {
         return ListPhotoHolder(
@@ -34,11 +36,15 @@ class ListPhotoAdapter(
                 .centerCrop()
                 .into(photoImageview)
 
+            dateTextView.text = SimpleDateFormat(FORMAT, Locale.getDefault()).format(photo.date.time)
+
             photoCardView.setOnClickListener {
                 onItemClicked(photo)
             }
         }
     }
+
+    inner class ListPhotoHolder (val binding: FragmentItemListPhotoBinding): RecyclerView.ViewHolder(binding.root)
 
     companion object DiffCallback : DiffUtil.ItemCallback<Photo>(){
         override fun areItemsTheSame(oldItem: Photo, newItem: Photo): Boolean {
@@ -51,4 +57,3 @@ class ListPhotoAdapter(
     }
 }
 
-class ListPhotoHolder (val binding: FragmentItemListPhotoBinding): RecyclerView.ViewHolder(binding.root)

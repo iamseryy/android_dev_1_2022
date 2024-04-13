@@ -20,8 +20,14 @@
             app:popExitAnim="@anim/slide_to_right_anim"/>
         <action
             android:id="@+id/action_listPhotoFragment_to_photoFragment"
-            app:destination="@id/photoFragment" />/>
+            app:destination="@id/photoFragment"
+            app:launchSingleTop="true"
+            app:enterAnim="@anim/slide_from_right_anim"
+            app:exitAnim="@anim/slide_to_left_anim"
+            app:popEnterAnim="@anim/slide_from_left_anim"
+            app:popExitAnim="@anim/slide_to_right_anim"/>
     </fragment>
+
     <fragment
         android:id="@+id/photographFragment"
         android:name="com.attractions.presentation.view.PhotographFragment"
@@ -34,6 +40,14 @@
             app:popUpToInclusive="true"
             app:enterAnim="@anim/slide_from_left_anim"
             app:exitAnim="@anim/slide_to_right_anim"/>
+        <action
+            android:id="@+id/action_photographFragment_to_photoFragment"
+            app:destination="@id/photoFragment"
+            app:launchSingleTop="true"
+            app:enterAnim="@anim/slide_from_right_anim"
+            app:exitAnim="@anim/slide_to_left_anim"
+            app:popEnterAnim="@anim/slide_from_left_anim"
+            app:popExitAnim="@anim/slide_to_right_anim"/>
     </fragment>
     <fragment
         android:id="@+id/photoFragment"
@@ -45,6 +59,6 @@
             app:popUpTo="@id/listPhotoFragment"
             app:popUpToInclusive="true"
             app:enterAnim="@anim/slide_from_left_anim"
-            app:exitAnim="@anim/slide_to_right_anim"/>/>
+            app:exitAnim="@anim/slide_to_right_anim"/>
     </fragment>
 </navigation>

@@ -6,24 +6,32 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.attractions.R
 import com.attractions.databinding.FragmentPhotoBinding
 import com.bumptech.glide.Glide
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 private const val ARG_URI = "uri"
+private const val ARG_DATE = "date"
 
+
+@AndroidEntryPoint
 class PhotoFragment : Fragment() {
     private var uri: String? = null
+    private var date: String? = null
 
     private var _binding: FragmentPhotoBinding? = null
     private val binding get() = _binding!!
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             uri = it.getString(ARG_URI)
+            date = it.getString(ARG_DATE)
         }
     }
 
@@ -44,6 +52,8 @@ class PhotoFragment : Fragment() {
                 .load(uri)
                 .centerCrop()
                 .into(photoImageview)
+
+            dateTextView.text = date
         }
     }
 
@@ -53,10 +63,11 @@ class PhotoFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(uri: String, date: String) =
             PhotoFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_URI, uri)
+                    putString(ARG_DATE, date)
                 }
             }
     }

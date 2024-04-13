@@ -1,7 +1,6 @@
 package com.attractions.presentation.view
 
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,11 +15,15 @@ import com.attractions.entity.Photo
 import com.attractions.presentation.adapter.ListPhotoAdapter
 import com.attractions.presentation.viewmodel.ListPhotoViewModel
 import com.attractions.presentation.viewmodel.ListPhotoViewModelFactory
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import java.text.SimpleDateFormat
+import java.util.Locale
 import javax.inject.Inject
+
+
+private const val FORMAT = "yyyy-MM-dd"
 
 
 @AndroidEntryPoint
@@ -63,6 +66,7 @@ class ListPhotoFragment : Fragment() {
     private fun onItemClicked(photo: Photo) {
         val bundle = Bundle().apply {
             putString("uri", photo.uri)
+            putString("date", SimpleDateFormat(FORMAT, Locale.getDefault()).format(photo.date.time))
         }
         findNavController().navigate(R.id.action_listPhotoFragment_to_photoFragment, bundle)
     }

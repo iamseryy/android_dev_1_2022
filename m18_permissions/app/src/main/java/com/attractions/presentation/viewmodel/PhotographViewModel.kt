@@ -11,11 +11,6 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class PhotographViewModel @Inject constructor(private val useCase: PhotoUseCase): ViewModel() {
-
-    private val _error = Channel<String>()
-    val error = _error.receiveAsFlow()
-
-
     fun insertPhoto(photo: Photo) {
         viewModelScope.launch {
             kotlin.runCatching {
@@ -23,8 +18,7 @@ class PhotographViewModel @Inject constructor(private val useCase: PhotoUseCase)
             }.fold(
                 onSuccess = {},
                 onFailure = {
-                    Log.d("MarsPhotoViewModel", it.message ?: "")
-                    _error.send(it.message ?: "")
+                    Log.d("PhotographViewModel", it.message ?: "")
                 }
             )
         }
