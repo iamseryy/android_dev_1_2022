@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Достопримечательности</string>
+    <string name="add_photo">Добавить фото</string>
+    <string name="permission_is_not_granted">Разрешение не предоставлено</string>
+    <string name="delete_photo">Удалить фото</string>
+</resources>
