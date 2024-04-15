@@ -26,6 +26,14 @@
             app:exitAnim="@anim/slide_to_left_anim"
             app:popEnterAnim="@anim/slide_from_left_anim"
             app:popExitAnim="@anim/slide_to_right_anim"/>
+        <action
+            android:id="@+id/action_listPhotoFragment_to_mapFragment"
+            app:destination="@id/mapFragment"
+            app:launchSingleTop="true"
+            app:enterAnim="@anim/slide_from_right_anim"
+            app:exitAnim="@anim/slide_to_left_anim"
+            app:popEnterAnim="@anim/slide_from_left_anim"
+            app:popExitAnim="@anim/slide_to_right_anim"/>
     </fragment>
 
     <fragment
@@ -55,6 +63,19 @@
         android:label="PhotoFragment" >
         <action
             android:id="@+id/action_photoFragment_to_listPhotoFragment"
+            app:destination="@id/listPhotoFragment"
+            app:popUpTo="@id/listPhotoFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_from_left_anim"
+            app:exitAnim="@anim/slide_to_right_anim"/>
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.attractions.presentation.view.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" >
+        <action
+            android:id="@+id/action_mapFragment_to_listPhotoFragment"
             app:destination="@id/listPhotoFragment"
             app:popUpTo="@id/listPhotoFragment"
             app:popUpToInclusive="true"

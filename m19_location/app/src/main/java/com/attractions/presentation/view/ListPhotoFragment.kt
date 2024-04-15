@@ -50,16 +50,25 @@ class ListPhotoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.photosRecyclerview.adapter = listPhotoAdapter
+        binding.apply {
+            photosRecyclerview.adapter = listPhotoAdapter
+
+            takePhotoButton.setOnClickListener {
+                findNavController().navigate(R.id.action_listPhotoFragment_to_photographFragment)
+            }
+
+            mapButton.setOnClickListener {
+                findNavController().navigate(R.id.action_listPhotoFragment_to_mapFragment)
+            }
+        }
+
 
         viewModel.photos.onEach {
             listPhotoAdapter.submitList(it)
         }.launchIn(viewLifecycleOwner.lifecycleScope)
 
 
-        binding.takePhotoButton.setOnClickListener {
-            findNavController().navigate(R.id.action_listPhotoFragment_to_photographFragment)
-        }
+
 
     }
 
