@@ -95,8 +95,8 @@ class PhotographFragment : Fragment() {
 
             imagePreview.setOnClickListener {
                 val bundle = Bundle().apply {
-                    putString("uri", newPhoto.uri)
-                    putString("date", SimpleDateFormat(DATE_PHOTO_FORMAT, Locale.getDefault()).format(newPhoto.date.time))
+                    putString(ARG_URI, newPhoto.uri)
+                    putString(ARG_DATE, SimpleDateFormat(DATE_PHOTO_FORMAT, Locale.getDefault()).format(newPhoto.date.time))
                 }
                 findNavController().navigate(R.id.action_photographFragment_to_photoFragment, bundle)
             }

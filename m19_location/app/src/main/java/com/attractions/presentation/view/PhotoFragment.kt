@@ -6,17 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.attractions.R
 import com.attractions.databinding.FragmentPhotoBinding
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
-private const val ARG_URI = "uri"
-private const val ARG_DATE = "date"
+
+const val ARG_URI = "uri"
+const val ARG_DATE = "date"
 
 
 @AndroidEntryPoint

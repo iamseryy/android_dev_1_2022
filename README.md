@@ -18,3 +18,4 @@
 |15|**[m16_architecture](https://github.com/iamseryy/android_dev_1_2022/tree/main/m16_architecture)**|Архитектура проекта|
 |16|**[m17_recyclerview](https://github.com/iamseryy/android_dev_1_2022/tree/main/m17_recyclerview)**|Работа с массивами данных|
 |17|**[m18_permissions](https://github.com/iamseryy/android_dev_1_2022/tree/main/m18_permissions)**|Работа с защищёнными разделами ОС|
+|18|**[m19_location](https://github.com/iamseryy/android_dev_1_2022/tree/main/m19_location)**|Работа с геопозиционированием|

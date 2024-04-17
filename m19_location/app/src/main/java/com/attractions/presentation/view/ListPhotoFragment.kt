@@ -74,8 +74,8 @@ class ListPhotoFragment : Fragment() {
 
     private fun onItemClicked(photo: Photo) {
         val bundle = Bundle().apply {
-            putString("uri", photo.uri)
-            putString("date", SimpleDateFormat(FORMAT, Locale.getDefault()).format(photo.date.time))
+            putString(ARG_URI, photo.uri)
+            putString(ARG_DATE, SimpleDateFormat(FORMAT, Locale.getDefault()).format(photo.date.time))
         }
         findNavController().navigate(R.id.action_listPhotoFragment_to_photoFragment, bundle)
     }
