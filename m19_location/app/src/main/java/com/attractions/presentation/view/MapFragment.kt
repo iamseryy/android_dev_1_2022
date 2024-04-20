@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.attractions.R
@@ -47,7 +48,7 @@ class MapFragment : Fragment(), CameraListener {
     private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!
 
-
+    private var isPermissionGranted = false
     private lateinit var currentUserPoint: Point
     private lateinit var currentPoint: Point
     private lateinit var userLocationLayer: UserLocationLayer
@@ -69,8 +70,10 @@ class MapFragment : Fragment(), CameraListener {
     private val launcher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
             if (map.values.all { it }) {
-                viewModel.startLocation()
+                isPermissionGranted = true
+                prepareMapForLocationPoints()
             } else {
+                isPermissionGranted = false
                 view?.let {
                     Snackbar.make(
                         it,
@@ -80,6 +83,33 @@ class MapFragment : Fragment(), CameraListener {
                 }
             }
         }
+
+    private fun prepareMapForLocationPoints() {
+        userLocationLayer = mapKit.createUserLocationLayer(binding.mapview.mapWindow)
+        userLocationLayer.isVisible = true
+        mapView.mapWindow.map.addCameraListener(this)
+
+        viewModel.startLocation()
+
+        viewModel.sightsFlow.onEach {
+            val imageProvider =
+                ImageProvider.fromResource(requireContext(), R.drawable.point)
+
+            mapObjectCollection = mapView.mapWindow.map.mapObjects.addCollection()
+            it?.features?.forEach { point ->
+                mapObjectCollection.addPlacemark().apply {
+                    geometry = Point(
+                        point.geometry.coordinates[1],
+                        point.geometry.coordinates[0]
+                    )
+                    userData = point.properties.name
+                    setIcon(imageProvider)
+                    addTapListener(placeMarkTapListener)
+                }
+            }
+
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,81 +129,11 @@ class MapFragment : Fragment(), CameraListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mapView = binding.mapview
+
         checkPermissions()
 
-        mapView = binding.mapview
-        userLocationLayer = mapKit.createUserLocationLayer(binding.mapview.mapWindow)
-        userLocationLayer.isVisible = true
-        mapView.mapWindow.map.addCameraListener(this)
-
-
-        if (savedInstanceState != null) {
-            currentLatitude = savedInstanceState.getDouble(OUT_STATE_LATITUDE)
-            currentLongitude = savedInstanceState.getDouble(OUT_STATE_LONGITUDE)
-            currentZoom = savedInstanceState.getFloat(OUT_STATE_ZOOM)
-            currentPoint = Point(currentLatitude, currentLongitude)
-
-            mapView.map.move(
-                CameraPosition(
-                    currentPoint,
-                    currentZoom,
-                    USER_CURRENT_AZIMUTH,
-                    USER_CURRENT_TILT),
-                Animation(Animation.Type.LINEAR, 0.0F),
-                null
-            )
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.locationFlow.collect {
-                if(it != null) {
-                    if(!this@MapFragment::currentUserPoint.isInitialized
-                        && !this@MapFragment::currentPoint.isInitialized) {
-                        currentUserPoint = it
-                        mapView.map.move(
-                            CameraPosition(
-                                currentUserPoint,
-                                USER_CURRENT_ZOOM,
-                                USER_CURRENT_AZIMUTH,
-                                USER_CURRENT_TILT),
-                            Animation(Animation.Type.LINEAR, ANIM_DURATION),
-                            null
-                        )
-                        viewModel.findSights(it, RADIUS, LIMIT)
-                    }
-                    currentUserPoint = it
-                }
-            }
-        }
-
-        viewModel.sightsFlow.onEach {
-            val imageProvider =
-                ImageProvider.fromResource(requireContext(), R.drawable.point)
-
-            mapObjectCollection = mapView.mapWindow.map.mapObjects.addCollection()
-            it?.features?.forEach { point ->
-                mapObjectCollection.addPlacemark().apply {
-                    geometry = Point(point.geometry.coordinates[1],
-                        point.geometry.coordinates[0]
-                    )
-                    userData = point.properties.name
-                    setIcon(imageProvider)
-                    addTapListener(placeMarkTapListener)
-                }
-            }
-
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
-
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.sightsFlow.collect {
-
-            }
-        }
-
         binding.apply {
-            mapView = this.mapview
-
             increaseButton.setOnClickListener {
                 zoomIn()
             }
@@ -183,15 +143,66 @@ class MapFragment : Fragment(), CameraListener {
             }
 
             currentLocationButton.setOnClickListener {
-                mapView.map.move(
-                    CameraPosition(
-                        currentUserPoint,
-                        currentZoom,
-                        USER_CURRENT_AZIMUTH,
-                        USER_CURRENT_TILT),
-                    Animation(Animation.Type.LINEAR, ANIM_DURATION),
-                    null
-                )
+                if (isPermissionGranted) {
+                    mapView.map.move(
+                        CameraPosition(
+                            currentUserPoint,
+                            currentZoom,
+                            USER_CURRENT_AZIMUTH,
+                            USER_CURRENT_TILT),
+                        Animation(Animation.Type.LINEAR, ANIM_DURATION),
+                        null
+                    )
+                } else {
+                    Snackbar.make(
+                        view,
+                        resources.getString(R.string.permission_is_not_granted),
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+
+        if (savedInstanceState != null) {
+            currentLatitude = savedInstanceState.getDouble(OUT_STATE_LATITUDE)
+            currentLongitude = savedInstanceState.getDouble(OUT_STATE_LONGITUDE)
+            currentZoom = savedInstanceState.getFloat(OUT_STATE_ZOOM)
+            currentPoint = Point(currentLatitude, currentLongitude)
+
+
+            mapView.map.move(
+                CameraPosition(
+                    currentPoint,
+                    currentZoom,
+                    USER_CURRENT_AZIMUTH,
+                    USER_CURRENT_TILT
+                ),
+                Animation(Animation.Type.LINEAR, 0.0F),
+                null
+            )
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.locationFlow.collect {
+                if (it != null) {
+                    if (!this@MapFragment::currentUserPoint.isInitialized
+                        && !this@MapFragment::currentPoint.isInitialized
+                    ) {
+                        currentUserPoint = it
+                        mapView.map.move(
+                            CameraPosition(
+                                currentUserPoint,
+                                USER_CURRENT_ZOOM,
+                                USER_CURRENT_AZIMUTH,
+                                USER_CURRENT_TILT
+                            ),
+                            Animation(Animation.Type.LINEAR, ANIM_DURATION),
+                            null
+                        )
+                        viewModel.findSights(it, RADIUS, LIMIT)
+                    }
+                    currentUserPoint = it
+                }
             }
         }
 
@@ -226,8 +237,10 @@ class MapFragment : Fragment(), CameraListener {
         if (REQUEST_PERMISSIONS.all { permission ->
             ContextCompat.checkSelfPermission( requireContext(), permission) == PackageManager.PERMISSION_GRANTED
         }) {
-            viewModel.startLocation()
+            isPermissionGranted = true
+            prepareMapForLocationPoints()
         } else {
+            isPermissionGranted = false
             launcher.launch(REQUEST_PERMISSIONS)
         }
     }
