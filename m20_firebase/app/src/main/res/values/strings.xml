@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Attractions</string>
+    <string name="add_photo">Add photo</string>
+    <string name="delete_photo">Delete photo</string>
+    <string name="permission_is_not_granted">Permission to access device location data has not been granted. Functionality is limited.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="increase">Increase</string>
+    <string name="decrease">Decrease</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Достопримечательности</string>
+    <string name="add_photo">Добавить фото</string>
+    <string name="permission_is_not_granted">Разрешение для доступа к данным о местоположении  устройства не предоставлено. Функциональность ограничена.</string>
+    <string name="delete_photo">Удалить фото</string>
+    <string name="increase">Увеличить</string>
+    <string name="decrease">Уменьшить</string>
+</resources>
